@@ -1,13 +1,581 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>CVora AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CVora AI — أنشئ سيرتك الذاتية باحتراف</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #6c63ff;
+      --primary-dark: #554dd8;
+      --dark: #17172b;
+      --text: #33334d;
+      --muted: #73738c;
+      --light: #f7f7fc;
+      --white: #ffffff;
+      --border: #e9e9f2;
+    }
+
+    body {
+      font-family: Arial, "Segoe UI", sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* NAVBAR */
+
+    nav {
+      width: 100%;
+      padding: 20px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.95);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 27px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-button {
+      background: var(--primary);
+      color: white;
+      padding: 11px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 650px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 7%;
+      background:
+        radial-gradient(circle at top right, #eceaff 0, transparent 35%),
+        radial-gradient(circle at bottom left, #f1edff 0, transparent 35%),
+        white;
+    }
+
+    .hero-content {
+      max-width: 850px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #f0efff;
+      color: var(--primary-dark);
+      padding: 8px 15px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 25px;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: auto;
+      font-size: 19px;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 35px;
+    }
+
+    .main-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 16px 30px;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 10px 25px rgba(108,99,255,0.25);
+    }
+
+    .main-button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .secondary-button {
+      display: inline-block;
+      margin-right: 10px;
+      padding: 15px 25px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-weight: bold;
+      color: var(--text);
+      background: white;
+    }
+
+    /* FEATURES */
+
+    .section {
+      padding: 90px 7%;
+    }
+
+    .section.light {
+      background: var(--light);
+    }
+
+    .section-title {
+      text-align: center;
+      max-width: 700px;
+      margin: auto;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 38px;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .features {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 30px;
+      border-radius: 18px;
+      transition: 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(30,30,60,0.08);
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0efff;
+      border-radius: 14px;
+      font-size: 25px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      color: var(--dark);
+      margin-bottom: 10px;
+      font-size: 19px;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    /* HOW IT WORKS */
+
+    .steps {
+      max-width: 1000px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .step {
+      text-align: center;
+      padding: 25px;
+    }
+
+    .step-number {
+      width: 55px;
+      height: 55px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .step h3 {
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* CTA */
+
+    .cta {
+      padding: 80px 7%;
+      text-align: center;
+      background: var(--dark);
+      color: white;
+    }
+
+    .cta h2 {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .cta p {
+      color: #c7c7d9;
+      margin-bottom: 28px;
+    }
+
+    .cta .main-button {
+      background: white;
+      color: var(--primary-dark);
+      box-shadow: none;
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 30px 7%;
+      text-align: center;
+      background: #11111f;
+      color: #8d8da5;
+      font-size: 13px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+
+      nav {
+        padding: 16px 5%;
+      }
+
+      .nav-button {
+        padding: 9px 13px;
+        font-size: 12px;
+      }
+
+      .hero {
+        min-height: 600px;
+        padding: 60px 5%;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .secondary-button {
+        display: block;
+        width: 100%;
+        margin: 12px 0 0;
+      }
+
+      .features,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 65px 5%;
+      }
+
+      .section-title h2 {
+        font-size: 30px;
+      }
+
+      .cta h2 {
+        font-size: 30px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-  <h1>Bienvenue sur CVora AI ✨</h1>
-  <p>Votre créateur de CV professionnel.</p>
+  <!-- NAVIGATION -->
+
+  <nav>
+
+    <div class="logo">
+      CV<span>ora</span> AI
+    </div>
+
+    <a href="#start" class="nav-button">
+      إنشاء CV
+    </a>
+
+  </nav>
+
+
+  <!-- HERO -->
+
+  <section class="hero" id="start">
+
+    <div class="hero-content">
+
+      <div class="badge">
+        ✨ أداة ذكية لإنشاء السيرة الذاتية
+      </div>
+
+      <h1>
+        أنشئ سيرتك الذاتية
+        <span>باحتراف</span>
+      </h1>
+
+      <p>
+        CVora AI يساعدك على إنشاء سيرة ذاتية عصرية واحترافية
+        بطريقة سهلة وسريعة، حتى لو لم تكن لديك خبرة في التصميم.
+      </p>
+
+      <button class="main-button" onclick="startCV()">
+        ✨ ابدأ إنشاء سيرتي الذاتية
+      </button>
+
+      <a href="#features" class="secondary-button">
+        اكتشف المميزات
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- FEATURES -->
+
+  <section class="section light" id="features">
+
+    <div class="section-title">
+
+      <h2>
+        كل ما تحتاجه لإنشاء CV احترافي
+      </h2>
+
+      <p>
+        أدوات بسيطة وذكية تساعدك على تقديم نفسك بأفضل صورة.
+      </p>
+
+    </div>
+
+
+    <div class="features">
+
+      <div class="feature-card">
+
+        <div class="icon">🤖</div>
+
+        <h3>
+          مساعدة بالذكاء الاصطناعي
+        </h3>
+
+        <p>
+          سنساعدك لاحقًا على كتابة وتحسين وصف الخبرات
+          والمهارات بطريقة احترافية.
+        </p>
+
+      </div>
+
+
+      <div class="feature-card">
+
+        <div class="icon">🎨</div>
+
+        <h3>
+          قوالب عصرية
+        </h3>
+
+        <p>
+          اختر من مجموعة قوالب احترافية مصممة لتناسب
+          مختلف المجالات والوظائف.
+        </p>
+
+      </div>
+
+
+      <div class="feature-card">
+
+        <div class="icon">📄</div>
+
+        <h3>
+          جاهز للتقديم
+        </h3>
+
+        <p>
+          احصل على سيرة ذاتية منظمة وجاهزة للاستخدام
+          والتقديم على الوظائف.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- HOW IT WORKS -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <h2>
+        كيف يعمل CVora AI؟
+      </h2>
+
+      <p>
+        ثلاث خطوات بسيطة فقط.
+      </p>
+
+    </div>
+
+
+    <div class="steps">
+
+      <div class="step">
+
+        <div class="step-number">1</div>
+
+        <h3>
+          أدخل معلوماتك
+        </h3>
+
+        <p>
+          الاسم، الخبرة، التعليم والمهارات.
+        </p>
+
+      </div>
+
+
+      <div class="step">
+
+        <div class="step-number">2</div>
+
+        <h3>
+          اختر قالبك
+        </h3>
+
+        <p>
+          اختر التصميم الذي يناسب شخصيتك ومجالك.
+        </p>
+
+      </div>
+
+
+      <div class="step">
+
+        <div class="step-number">3</div>
+
+        <h3>
+          احصل على CV
+        </h3>
+
+        <p>
+          راجع سيرتك الذاتية وحمّلها عندما تصبح جاهزة.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CTA -->
+
+  <section class="cta">
+
+    <h2>
+      جاهز لإنشاء سيرتك الذاتية؟
+    </h2>
+
+    <p>
+      ابدأ الآن، وسنبني بقية الأدوات معًا.
+    </p>
+
+    <button class="main-button" onclick="startCV()">
+      🚀 ابدأ الآن
+    </button>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    © 2026 CVora AI — جميع الحقوق محفوظة
+
+  </footer>
+
+
+  <script>
+
+    function startCV() {
+
+      alert(
+        "🚀 رائع! الخطوة التالية ستكون إنشاء نموذج السيرة الذاتية."
+      );
+
+    }
+
+  </script>
 
 </body>
-</html>
+        </html>
