@@ -1,581 +1,870 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>CVora AI — أنشئ سيرتك الذاتية باحتراف</title>
+<title>CVora AI — منشئ السيرة الذاتية</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    :root {
-      --primary: #6c63ff;
-      --primary-dark: #554dd8;
-      --dark: #17172b;
-      --text: #33334d;
-      --muted: #73738c;
-      --light: #f7f7fc;
-      --white: #ffffff;
-      --border: #e9e9f2;
-    }
+:root{
+  --primary:#6c63ff;
+  --primary-dark:#554dd8;
+  --dark:#18182b;
+  --text:#33334d;
+  --muted:#77778f;
+  --light:#f7f7fc;
+  --white:#fff;
+  --border:#e7e7f0;
+}
 
-    body {
-      font-family: Arial, "Segoe UI", sans-serif;
-      background: var(--white);
-      color: var(--text);
-      line-height: 1.7;
-    }
+body{
+  font-family:Arial,"Segoe UI",sans-serif;
+  background:var(--light);
+  color:var(--text);
+}
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+button,
+input,
+textarea{
+  font-family:inherit;
+}
 
-    /* NAVBAR */
+button{
+  cursor:pointer;
+}
 
-    nav {
-      width: 100%;
-      padding: 20px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(255,255,255,0.95);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+/* NAVBAR */
 
-    .logo {
-      font-size: 27px;
-      font-weight: 800;
-      color: var(--dark);
-    }
+nav{
+  height:72px;
+  padding:0 6%;
+  background:white;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
 
-    .logo span {
-      color: var(--primary);
-    }
+.logo{
+  font-size:26px;
+  font-weight:800;
+  color:var(--dark);
+}
 
-    .nav-button {
-      background: var(--primary);
-      color: white;
-      padding: 11px 20px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: bold;
-    }
+.logo span{
+  color:var(--primary);
+}
 
-    /* HERO */
+.nav-btn{
+  border:0;
+  background:var(--primary);
+  color:white;
+  padding:10px 18px;
+  border-radius:9px;
+  font-weight:bold;
+}
 
-    .hero {
-      min-height: 650px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 80px 7%;
-      background:
-        radial-gradient(circle at top right, #eceaff 0, transparent 35%),
-        radial-gradient(circle at bottom left, #f1edff 0, transparent 35%),
-        white;
-    }
+/* HERO */
 
-    .hero-content {
-      max-width: 850px;
-    }
+.hero{
+  min-height:600px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:70px 6%;
+  background:
+    radial-gradient(circle at 10% 20%,#eeeaff,transparent 30%),
+    radial-gradient(circle at 90% 80%,#eeeaff,transparent 30%),
+    white;
+}
 
-    .badge {
-      display: inline-block;
-      background: #f0efff;
-      color: var(--primary-dark);
-      padding: 8px 15px;
-      border-radius: 50px;
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 22px;
-    }
+.hero-content{
+  max-width:850px;
+}
 
-    .hero h1 {
-      font-size: clamp(38px, 6vw, 68px);
-      line-height: 1.15;
-      color: var(--dark);
-      margin-bottom: 25px;
-      letter-spacing: -2px;
-    }
+.badge{
+  display:inline-block;
+  padding:8px 15px;
+  border-radius:30px;
+  background:#efedff;
+  color:var(--primary-dark);
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:22px;
+}
 
-    .hero h1 span {
-      color: var(--primary);
-    }
+.hero h1{
+  font-size:clamp(38px,6vw,65px);
+  line-height:1.15;
+  color:var(--dark);
+  margin-bottom:22px;
+}
 
-    .hero p {
-      max-width: 680px;
-      margin: auto;
-      font-size: 19px;
-      color: var(--muted);
-      line-height: 1.9;
-      margin-bottom: 35px;
-    }
+.hero h1 span{
+  color:var(--primary);
+}
 
-    .main-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 16px 30px;
-      border-radius: 12px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.2s;
-      box-shadow: 0 10px 25px rgba(108,99,255,0.25);
-    }
+.hero p{
+  max-width:680px;
+  margin:0 auto 30px;
+  color:var(--muted);
+  font-size:18px;
+  line-height:1.9;
+}
 
-    .main-button:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-    }
+.primary-btn{
+  border:0;
+  background:var(--primary);
+  color:white;
+  padding:15px 27px;
+  border-radius:11px;
+  font-size:16px;
+  font-weight:bold;
+  box-shadow:0 10px 25px rgba(108,99,255,.22);
+}
 
-    .secondary-button {
-      display: inline-block;
-      margin-right: 10px;
-      padding: 15px 25px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      font-weight: bold;
-      color: var(--text);
-      background: white;
-    }
+.primary-btn:hover{
+  background:var(--primary-dark);
+}
 
-    /* FEATURES */
+/* BUILDER */
 
-    .section {
-      padding: 90px 7%;
-    }
+#builder{
+  display:none;
+  padding:35px 5%;
+}
 
-    .section.light {
-      background: var(--light);
-    }
+.builder-header{
+  max-width:1300px;
+  margin:0 auto 25px;
+}
 
-    .section-title {
-      text-align: center;
-      max-width: 700px;
-      margin: auto;
-      margin-bottom: 50px;
-    }
+.builder-header h2{
+  color:var(--dark);
+  font-size:30px;
+  margin-bottom:5px;
+}
 
-    .section-title h2 {
-      font-size: 38px;
-      color: var(--dark);
-      margin-bottom: 12px;
-    }
+.builder-header p{
+  color:var(--muted);
+}
 
-    .section-title p {
-      color: var(--muted);
-      font-size: 17px;
-    }
+.builder{
+  max-width:1300px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:400px 1fr;
+  gap:25px;
+  align-items:start;
+}
 
-    .features {
-      max-width: 1100px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
+.form-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:24px;
+}
 
-    .feature-card {
-      background: white;
-      border: 1px solid var(--border);
-      padding: 30px;
-      border-radius: 18px;
-      transition: 0.2s;
-    }
+.form-card h3{
+  color:var(--dark);
+  margin-bottom:20px;
+}
 
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(30,30,60,0.08);
-    }
+.field{
+  margin-bottom:16px;
+}
 
-    .icon {
-      width: 52px;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f0efff;
-      border-radius: 14px;
-      font-size: 25px;
-      margin-bottom: 20px;
-    }
+.field label{
+  display:block;
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:7px;
+}
 
-    .feature-card h3 {
-      color: var(--dark);
-      margin-bottom: 10px;
-      font-size: 19px;
-    }
+.field input,
+.field textarea{
+  width:100%;
+  border:1px solid #dcdce7;
+  border-radius:9px;
+  padding:11px 12px;
+  font-size:14px;
+  outline:none;
+  background:white;
+}
 
-    .feature-card p {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.8;
-    }
+.field input:focus,
+.field textarea:focus{
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(108,99,255,.1);
+}
 
-    /* HOW IT WORKS */
+.field textarea{
+  min-height:110px;
+  resize:vertical;
+}
 
-    .steps {
-      max-width: 1000px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-    }
+.back-btn{
+  border:0;
+  background:#f0efff;
+  color:var(--primary-dark);
+  padding:10px 15px;
+  border-radius:9px;
+  font-weight:bold;
+  margin-bottom:18px;
+}
 
-    .step {
-      text-align: center;
-      padding: 25px;
-    }
+/* PREVIEW */
 
-    .step-number {
-      width: 55px;
-      height: 55px;
-      margin: 0 auto 18px;
-      border-radius: 50%;
-      background: var(--primary);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 20px;
-      font-weight: bold;
-    }
+.preview-area{
+  background:#e5e5ed;
+  padding:25px;
+  border-radius:18px;
+  min-height:800px;
+}
 
-    .step h3 {
-      margin-bottom: 8px;
-      color: var(--dark);
-    }
+.preview-label{
+  font-weight:bold;
+  margin-bottom:12px;
+  color:var(--dark);
+}
 
-    .step p {
-      color: var(--muted);
-      font-size: 14px;
-    }
+.cv{
+  width:210mm;
+  min-height:297mm;
+  max-width:100%;
+  margin:auto;
+  background:white;
+  box-shadow:0 8px 30px rgba(0,0,0,.12);
+  display:grid;
+  grid-template-columns:32% 68%;
+  direction:ltr;
+}
 
-    /* CTA */
+.cv-side{
+  background:var(--dark);
+  color:white;
+  padding:32px 24px;
+  direction:rtl;
+}
 
-    .cta {
-      padding: 80px 7%;
-      text-align: center;
-      background: var(--dark);
-      color: white;
-    }
+.cv-main{
+  padding:35px;
+  direction:rtl;
+}
 
-    .cta h2 {
-      font-size: 38px;
-      margin-bottom: 15px;
-    }
+.cv-name{
+  font-size:28px;
+  font-weight:800;
+  line-height:1.2;
+  margin-bottom:7px;
+  word-break:break-word;
+}
 
-    .cta p {
-      color: #c7c7d9;
-      margin-bottom: 28px;
-    }
+.cv-job{
+  color:#c8c4ff;
+  font-size:14px;
+  font-weight:bold;
+  margin-bottom:25px;
+  word-break:break-word;
+}
 
-    .cta .main-button {
-      background: white;
-      color: var(--primary-dark);
-      box-shadow: none;
-    }
+.cv-section{
+  margin-bottom:28px;
+}
 
-    /* FOOTER */
+.cv-section-title{
+  color:var(--primary);
+  font-size:12px;
+  font-weight:bold;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  border-bottom:2px solid var(--primary);
+  padding-bottom:6px;
+  margin-bottom:12px;
+}
 
-    footer {
-      padding: 30px 7%;
-      text-align: center;
-      background: #11111f;
-      color: #8d8da5;
-      font-size: 13px;
-    }
+.cv-side .cv-section-title{
+  color:#c8c4ff;
+  border-color:#c8c4ff;
+}
 
-    /* MOBILE */
+.contact{
+  font-size:11px;
+  line-height:2;
+  color:#d7d7e3;
+  word-break:break-word;
+}
 
-    @media (max-width: 800px) {
+.cv-summary{
+  color:#555568;
+  font-size:12px;
+  line-height:1.8;
+  white-space:pre-line;
+}
 
-      nav {
-        padding: 16px 5%;
-      }
+.placeholder{
+  color:#aaaabb;
+  font-style:italic;
+}
 
-      .nav-button {
-        padding: 9px 13px;
-        font-size: 12px;
-      }
+/* FEATURES */
 
-      .hero {
-        min-height: 600px;
-        padding: 60px 5%;
-      }
+.features{
+  padding:80px 6%;
+  background:white;
+}
 
-      .hero p {
-        font-size: 16px;
-      }
+.features-title{
+  text-align:center;
+  max-width:650px;
+  margin:0 auto 45px;
+}
 
-      .secondary-button {
-        display: block;
-        width: 100%;
-        margin: 12px 0 0;
-      }
+.features-title h2{
+  color:var(--dark);
+  font-size:35px;
+  margin-bottom:10px;
+}
 
-      .features,
-      .steps {
-        grid-template-columns: 1fr;
-      }
+.features-title p{
+  color:var(--muted);
+}
 
-      .section {
-        padding: 65px 5%;
-      }
+.feature-grid{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
 
-      .section-title h2 {
-        font-size: 30px;
-      }
+.feature{
+  padding:25px;
+  border:1px solid var(--border);
+  border-radius:16px;
+}
 
-      .cta h2 {
-        font-size: 30px;
-      }
-    }
-  </style>
+.feature-icon{
+  font-size:28px;
+  margin-bottom:12px;
+}
+
+.feature h3{
+  margin-bottom:7px;
+  color:var(--dark);
+}
+
+.feature p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+}
+
+/* MOBILE */
+
+@media(max-width:950px){
+
+  .builder{
+    grid-template-columns:1fr;
+  }
+
+  .preview-area{
+    overflow:auto;
+  }
+
+  .cv{
+    min-width:700px;
+  }
+
+  .feature-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+
+  nav{
+    padding:0 4%;
+  }
+
+  .hero{
+    padding:55px 5%;
+  }
+
+  .hero p{
+    font-size:16px;
+  }
+
+  #builder{
+    padding:20px 4%;
+  }
+
+  .form-card{
+    padding:18px;
+  }
+
+  .preview-area{
+    padding:10px;
+  }
+
+  .cv{
+    min-width:650px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- NAVIGATION -->
+<!-- NAVBAR -->
 
-  <nav>
+<nav>
 
-    <div class="logo">
-      CV<span>ora</span> AI
+  <div class="logo">
+    CV<span>ora</span> AI
+  </div>
+
+  <button class="nav-btn" onclick="openBuilder()">
+    إنشاء CV
+  </button>
+
+</nav>
+
+
+<!-- HOME -->
+
+<section class="hero" id="home">
+
+  <div class="hero-content">
+
+    <div class="badge">
+      ✨ أنشئ سيرتك الذاتية بسهولة
     </div>
 
-    <a href="#start" class="nav-button">
-      إنشاء CV
-    </a>
+    <h1>
+      اصنع CV احترافيًا
+      <span>في دقائق</span>
+    </h1>
 
-  </nav>
+    <p>
+      أدخل معلوماتك فقط، ودع CVora AI يساعدك على إنشاء
+      سيرة ذاتية عصرية ومنظمة وجاهزة للتقديم.
+    </p>
 
+    <button class="primary-btn" onclick="openBuilder()">
+      ✨ ابدأ إنشاء سيرتي الذاتية
+    </button>
 
-  <!-- HERO -->
+  </div>
 
-  <section class="hero" id="start">
+</section>
 
-    <div class="hero-content">
 
-      <div class="badge">
-        ✨ أداة ذكية لإنشاء السيرة الذاتية
-      </div>
+<!-- BUILDER -->
 
-      <h1>
-        أنشئ سيرتك الذاتية
-        <span>باحتراف</span>
-      </h1>
+<section id="builder">
 
-      <p>
-        CVora AI يساعدك على إنشاء سيرة ذاتية عصرية واحترافية
-        بطريقة سهلة وسريعة، حتى لو لم تكن لديك خبرة في التصميم.
-      </p>
+  <div class="builder-header">
 
-      <button class="main-button" onclick="startCV()">
-        ✨ ابدأ إنشاء سيرتي الذاتية
-      </button>
-
-      <a href="#features" class="secondary-button">
-        اكتشف المميزات
-      </a>
-
-    </div>
-
-  </section>
-
-
-  <!-- FEATURES -->
-
-  <section class="section light" id="features">
-
-    <div class="section-title">
-
-      <h2>
-        كل ما تحتاجه لإنشاء CV احترافي
-      </h2>
-
-      <p>
-        أدوات بسيطة وذكية تساعدك على تقديم نفسك بأفضل صورة.
-      </p>
-
-    </div>
-
-
-    <div class="features">
-
-      <div class="feature-card">
-
-        <div class="icon">🤖</div>
-
-        <h3>
-          مساعدة بالذكاء الاصطناعي
-        </h3>
-
-        <p>
-          سنساعدك لاحقًا على كتابة وتحسين وصف الخبرات
-          والمهارات بطريقة احترافية.
-        </p>
-
-      </div>
-
-
-      <div class="feature-card">
-
-        <div class="icon">🎨</div>
-
-        <h3>
-          قوالب عصرية
-        </h3>
-
-        <p>
-          اختر من مجموعة قوالب احترافية مصممة لتناسب
-          مختلف المجالات والوظائف.
-        </p>
-
-      </div>
-
-
-      <div class="feature-card">
-
-        <div class="icon">📄</div>
-
-        <h3>
-          جاهز للتقديم
-        </h3>
-
-        <p>
-          احصل على سيرة ذاتية منظمة وجاهزة للاستخدام
-          والتقديم على الوظائف.
-        </p>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- HOW IT WORKS -->
-
-  <section class="section">
-
-    <div class="section-title">
-
-      <h2>
-        كيف يعمل CVora AI؟
-      </h2>
-
-      <p>
-        ثلاث خطوات بسيطة فقط.
-      </p>
-
-    </div>
-
-
-    <div class="steps">
-
-      <div class="step">
-
-        <div class="step-number">1</div>
-
-        <h3>
-          أدخل معلوماتك
-        </h3>
-
-        <p>
-          الاسم، الخبرة، التعليم والمهارات.
-        </p>
-
-      </div>
-
-
-      <div class="step">
-
-        <div class="step-number">2</div>
-
-        <h3>
-          اختر قالبك
-        </h3>
-
-        <p>
-          اختر التصميم الذي يناسب شخصيتك ومجالك.
-        </p>
-
-      </div>
-
-
-      <div class="step">
-
-        <div class="step-number">3</div>
-
-        <h3>
-          احصل على CV
-        </h3>
-
-        <p>
-          راجع سيرتك الذاتية وحمّلها عندما تصبح جاهزة.
-        </p>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- CTA -->
-
-  <section class="cta">
+    <button class="back-btn" onclick="goHome()">
+      ← العودة
+    </button>
 
     <h2>
-      جاهز لإنشاء سيرتك الذاتية؟
+      أنشئ سيرتك الذاتية
     </h2>
 
     <p>
-      ابدأ الآن، وسنبني بقية الأدوات معًا.
+      ابدأ بإدخال معلوماتك الأساسية وشاهد النتيجة مباشرة.
     </p>
 
-    <button class="main-button" onclick="startCV()">
-      🚀 ابدأ الآن
-    </button>
-
-  </section>
+  </div>
 
 
-  <!-- FOOTER -->
+  <div class="builder">
 
-  <footer>
+    <!-- FORM -->
 
-    © 2026 CVora AI — جميع الحقوق محفوظة
+    <div class="form-card">
 
-  </footer>
+      <h3>
+        👤 معلوماتك الشخصية
+      </h3>
 
 
-  <script>
+      <div class="field">
 
-    function startCV() {
+        <label>الاسم الكامل</label>
 
-      alert(
-        "🚀 رائع! الخطوة التالية ستكون إنشاء نموذج السيرة الذاتية."
-      );
+        <input
+          id="name"
+          type="text"
+          placeholder="مثال: خلود"
+          oninput="updateCV()"
+        >
 
-    }
+      </div>
 
-  </script>
+
+      <div class="field">
+
+        <label>المسمى الوظيفي</label>
+
+        <input
+          id="job"
+          type="text"
+          placeholder="مثال: Chargée de clientèle"
+          oninput="updateCV()"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>البريد الإلكتروني</label>
+
+        <input
+          id="email"
+          type="email"
+          placeholder="exemple@email.com"
+          oninput="updateCV()"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>رقم الهاتف</label>
+
+        <input
+          id="phone"
+          type="text"
+          placeholder="+213 ..."
+          oninput="updateCV()"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>المدينة / البلد</label>
+
+        <input
+          id="location"
+          type="text"
+          placeholder="الجزائر، الجزائر"
+          oninput="updateCV()"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>النبذة المهنية</label>
+
+        <textarea
+          id="summary"
+          placeholder="اكتب نبذة قصيرة عن خبرتك وأهدافك المهنية..."
+          oninput="updateCV()"
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <!-- PREVIEW -->
+
+    <div class="preview-area">
+
+      <div class="preview-label">
+        👀 المعاينة المباشرة
+      </div>
+
+      <div class="cv">
+
+        <!-- SIDE -->
+
+        <aside class="cv-side">
+
+          <div class="cv-name" id="cvName">
+            اسمك الكامل
+          </div>
+
+          <div class="cv-job" id="cvJob">
+            المسمى الوظيفي
+          </div>
+
+
+          <div class="cv-section">
+
+            <div class="cv-section-title">
+              التواصل
+            </div>
+
+            <div class="contact">
+
+              <div id="cvEmail">
+                البريد الإلكتروني
+              </div>
+
+              <div id="cvPhone">
+                رقم الهاتف
+              </div>
+
+              <div id="cvLocation">
+                المدينة / البلد
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="cv-section">
+
+            <div class="cv-section-title">
+              المهارات
+            </div>
+
+            <div class="contact">
+              ستتم إضافة المهارات لاحقًا
+            </div>
+
+          </div>
+
+        </aside>
+
+
+        <!-- MAIN -->
+
+        <main class="cv-main">
+
+          <div class="cv-section">
+
+            <div class="cv-section-title">
+              الملف الشخصي
+            </div>
+
+            <div class="cv-summary" id="cvSummary">
+
+              <span class="placeholder">
+                ستظهر نبذتك المهنية هنا...
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="cv-section">
+
+            <div class="cv-section-title">
+              الخبرة المهنية
+            </div>
+
+            <div class="placeholder">
+              سيتم إضافة الخبرات في الخطوة القادمة.
+            </div>
+
+          </div>
+
+
+          <div class="cv-section">
+
+            <div class="cv-section-title">
+              التعليم
+            </div>
+
+            <div class="placeholder">
+              سيتم إضافة التعليم في الخطوة القادمة.
+            </div>
+
+          </div>
+
+        </main>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="features" id="features">
+
+  <div class="features-title">
+
+    <h2>
+      لماذا CVora AI؟
+    </h2>
+
+    <p>
+      نريد أن نجعل إنشاء السيرة الذاتية أمرًا بسيطًا للجميع.
+    </p>
+
+  </div>
+
+
+  <div class="feature-grid">
+
+    <div class="feature">
+
+      <div class="feature-icon">🤖</div>
+
+      <h3>ذكاء اصطناعي</h3>
+
+      <p>
+        سنضيف لاحقًا مساعدًا ذكيًا يساعدك على تحسين
+        محتوى سيرتك الذاتية.
+      </p>
+
+    </div>
+
+
+    <div class="feature">
+
+      <div class="feature-icon">🎨</div>
+
+      <h3>تصاميم احترافية</h3>
+
+      <p>
+        قوالب عصرية تناسب مختلف الوظائف والمجالات.
+      </p>
+
+    </div>
+
+
+    <div class="feature">
+
+      <div class="feature-icon">📄</div>
+
+      <h3>جاهز للتقديم</h3>
+
+      <p>
+        هدفنا أن تحصل على CV منظم وجاهز لإرساله
+        إلى أصحاب العمل.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+
+function openBuilder(){
+
+  document.getElementById("home").style.display="none";
+
+  document.getElementById("features").style.display="none";
+
+  document.getElementById("builder").style.display="block";
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+function goHome(){
+
+  document.getElementById("builder").style.display="none";
+
+  document.getElementById("home").style.display="flex";
+
+  document.getElementById("features").style.display="block";
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+function updateCV(){
+
+  const name =
+    document.getElementById("name").value;
+
+  const job =
+    document.getElementById("job").value;
+
+  const email =
+    document.getElementById("email").value;
+
+  const phone =
+    document.getElementById("phone").value;
+
+  const location =
+    document.getElementById("location").value;
+
+  const summary =
+    document.getElementById("summary").value;
+
+
+  document.getElementById("cvName").textContent =
+    name || "اسمك الكامل";
+
+
+  document.getElementById("cvJob").textContent =
+    job || "المسمى الوظيفي";
+
+
+  document.getElementById("cvEmail").textContent =
+    email || "البريد الإلكتروني";
+
+
+  document.getElementById("cvPhone").textContent =
+    phone || "رقم الهاتف";
+
+
+  document.getElementById("cvLocation").textContent =
+    location || "المدينة / البلد";
+
+
+  const summaryBox =
+    document.getElementById("cvSummary");
+
+
+  if(summary){
+
+    summaryBox.textContent=summary;
+
+  }else{
+
+    summaryBox.innerHTML =
+      '<span class="placeholder">ستظهر نبذتك المهنية هنا...</span>';
+
+  }
+
+}
+
+</script>
 
 </body>
-        </html>
+</html>
