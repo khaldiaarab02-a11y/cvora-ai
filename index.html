@@ -3,868 +3,211 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>CVora AI — منشئ السيرة الذاتية</title>
-
+<meta name="theme-color" content="#17102c">
+<title>حديقة الروح — رحلة للعودة إلى ذاتكِ</title>
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700&display=swap');
 
 :root{
-  --primary:#6c63ff;
-  --primary-dark:#554dd8;
-  --dark:#18182b;
-  --text:#33334d;
-  --muted:#77778f;
-  --light:#f7f7fc;
-  --white:#fff;
-  --border:#e7e7f0;
+  --ink:#fff8ff; --muted:#eadcf2; --glass:rgba(30,18,55,.55);
+  --gold:#ffdca0; --pink:#ffb9dd; --violet:#c8a9ff;
 }
-
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-  font-family:Arial,"Segoe UI",sans-serif;
-  background:var(--light);
-  color:var(--text);
+  margin:0; color:var(--ink); background:#110b22;
+  font-family:Cairo,system-ui,sans-serif; overflow-x:hidden;
 }
-
-button,
-input,
-textarea{
-  font-family:inherit;
+body:before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:20;
+  background:radial-gradient(circle at 50% 15%,rgba(255,220,180,.08),transparent 28%),
+             radial-gradient(circle at 10% 80%,rgba(213,150,255,.08),transparent 25%);
 }
-
-button{
-  cursor:pointer;
-}
-
-/* NAVBAR */
-
-nav{
-  height:72px;
-  padding:0 6%;
-  background:white;
-  border-bottom:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  position:sticky;
-  top:0;
-  z-index:100;
-}
-
-.logo{
-  font-size:26px;
-  font-weight:800;
-  color:var(--dark);
-}
-
-.logo span{
-  color:var(--primary);
-}
-
-.nav-btn{
-  border:0;
-  background:var(--primary);
-  color:white;
-  padding:10px 18px;
-  border-radius:9px;
-  font-weight:bold;
-}
-
-/* HERO */
-
 .hero{
-  min-height:600px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:70px 6%;
-  background:
-    radial-gradient(circle at 10% 20%,#eeeaff,transparent 30%),
-    radial-gradient(circle at 90% 80%,#eeeaff,transparent 30%),
-    white;
+  min-height:100svh; position:relative; display:flex; align-items:flex-end;
+  justify-content:center; overflow:hidden;
+  background:#17102c url("hero-garden.png") center/cover no-repeat;
 }
-
+.hero:after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(to top,rgba(13,7,25,.76),transparent 52%,rgba(8,4,22,.18));
+}
 .hero-content{
-  max-width:850px;
+  position:relative; z-index:2; text-align:center; width:min(900px,92%);
+  padding:0 20px 8vh; animation:rise 1.5s ease both;
 }
-
-.badge{
-  display:inline-block;
-  padding:8px 15px;
-  border-radius:30px;
-  background:#efedff;
-  color:var(--primary-dark);
-  font-size:13px;
-  font-weight:bold;
-  margin-bottom:22px;
+.kicker{font-size:clamp(13px,2vw,18px);letter-spacing:4px;color:#f7d9ff;margin-bottom:8px}
+h1{
+  font-family:Amiri,serif; font-size:clamp(54px,10vw,105px); line-height:.95;
+  margin:0 0 12px; text-shadow:0 4px 28px rgba(255,187,221,.45);
 }
-
-.hero h1{
-  font-size:clamp(38px,6vw,65px);
-  line-height:1.15;
-  color:var(--dark);
-  margin-bottom:22px;
+.subtitle{font-family:Amiri,serif;font-size:clamp(22px,4vw,34px);margin:0 auto 26px;color:#fff2fa}
+.cta{
+  border:1px solid rgba(255,235,200,.8); color:#3a1938; font:700 18px Cairo;
+  padding:15px 35px; border-radius:999px; cursor:pointer;
+  background:linear-gradient(135deg,#ffe8bb,#ffb9dc 55%,#d9c0ff);
+  box-shadow:0 0 35px rgba(255,196,220,.45), inset 0 1px 0 white;
+  transition:.3s; text-decoration:none; display:inline-flex; align-items:center; gap:10px;
 }
+.cta:hover{transform:translateY(-3px) scale(1.02)}
+.scroll{display:block;margin-top:20px;color:#f5e9fa;text-decoration:none;font-size:13px;opacity:.85}
+.scroll span{display:block;font-size:22px;animation:bob 1.5s infinite}
 
-.hero h1 span{
-  color:var(--primary);
+section{position:relative;padding:90px 7%;overflow:hidden}
+.section-title{text-align:center;font-family:Amiri,serif;font-size:clamp(36px,6vw,60px);margin:0 0 12px}
+.section-lead{text-align:center;color:var(--muted);max-width:680px;margin:0 auto 48px;line-height:2}
+.stars{position:absolute;inset:0;pointer-events:none;opacity:.45}
+.star{position:absolute;width:3px;height:3px;border-radius:50%;background:white;animation:twinkle 2.5s infinite}
+.garden{
+  background:
+    radial-gradient(circle at 20% 20%,rgba(255,190,220,.12),transparent 25%),
+    radial-gradient(circle at 80% 50%,rgba(183,155,255,.14),transparent 28%),
+    #17102c;
 }
-
-.hero p{
-  max-width:680px;
-  margin:0 auto 30px;
-  color:var(--muted);
-  font-size:18px;
-  line-height:1.9;
+.cards{
+  max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
 }
-
-.primary-btn{
-  border:0;
-  background:var(--primary);
-  color:white;
-  padding:15px 27px;
-  border-radius:11px;
-  font-size:16px;
-  font-weight:bold;
-  box-shadow:0 10px 25px rgba(108,99,255,.22);
+.card{
+  min-height:240px;padding:28px;border:1px solid rgba(255,255,255,.16);
+  border-radius:28px;background:var(--glass);backdrop-filter:blur(14px);
+  box-shadow:0 18px 60px rgba(0,0,0,.22);transition:.35s;cursor:pointer;
 }
-
-.primary-btn:hover{
-  background:var(--primary-dark);
+.card:hover{transform:translateY(-8px);border-color:rgba(255,220,180,.55)}
+.icon{font-size:44px;margin-bottom:12px}
+.card h3{font-family:Amiri,serif;font-size:28px;margin:0 0 8px}
+.card p{color:#decde8;line-height:1.9;margin:0}
+.journey{
+  background:linear-gradient(180deg,#17102c,#211535 55%,#160d27);
 }
-
-/* BUILDER */
-
-#builder{
-  display:none;
-  padding:35px 5%;
+.journey-box{
+  max-width:900px;margin:auto;padding:38px;border-radius:34px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);
+  backdrop-filter:blur(16px);text-align:center;
 }
-
-.builder-header{
-  max-width:1300px;
-  margin:0 auto 25px;
+.progress{height:8px;background:rgba(255,255,255,.12);border-radius:20px;overflow:hidden;margin:25px 0}
+.progress i{display:block;width:8%;height:100%;background:linear-gradient(90deg,#ffb9dd,#d6c0ff);border-radius:20px}
+.question{font-family:Amiri,serif;font-size:30px;line-height:1.6;margin:20px 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.choice{
+  padding:15px;border:1px solid rgba(255,255,255,.15);border-radius:18px;
+  background:rgba(20,10,40,.4);color:white;font:500 16px Cairo;cursor:pointer;
 }
-
-.builder-header h2{
-  color:var(--dark);
-  font-size:30px;
-  margin-bottom:5px;
-}
-
-.builder-header p{
-  color:var(--muted);
-}
-
-.builder{
-  max-width:1300px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:400px 1fr;
-  gap:25px;
-  align-items:start;
-}
-
-.form-card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:24px;
-}
-
-.form-card h3{
-  color:var(--dark);
-  margin-bottom:20px;
-}
-
-.field{
-  margin-bottom:16px;
-}
-
-.field label{
-  display:block;
-  font-size:13px;
-  font-weight:bold;
-  margin-bottom:7px;
-}
-
-.field input,
-.field textarea{
-  width:100%;
-  border:1px solid #dcdce7;
-  border-radius:9px;
-  padding:11px 12px;
-  font-size:14px;
-  outline:none;
-  background:white;
-}
-
-.field input:focus,
-.field textarea:focus{
-  border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(108,99,255,.1);
-}
-
-.field textarea{
-  min-height:110px;
-  resize:vertical;
-}
-
-.back-btn{
-  border:0;
-  background:#f0efff;
-  color:var(--primary-dark);
-  padding:10px 15px;
-  border-radius:9px;
-  font-weight:bold;
-  margin-bottom:18px;
-}
-
-/* PREVIEW */
-
-.preview-area{
-  background:#e5e5ed;
-  padding:25px;
-  border-radius:18px;
-  min-height:800px;
-}
-
-.preview-label{
-  font-weight:bold;
-  margin-bottom:12px;
-  color:var(--dark);
-}
-
-.cv{
-  width:210mm;
-  min-height:297mm;
-  max-width:100%;
-  margin:auto;
-  background:white;
-  box-shadow:0 8px 30px rgba(0,0,0,.12);
-  display:grid;
-  grid-template-columns:32% 68%;
+.choice:hover{background:rgba(255,190,220,.14);border-color:#ffb9dd}
+.fairy{
+  position:fixed;z-index:30;left:18px;bottom:18px;display:flex;align-items:flex-end;gap:10px;
   direction:ltr;
 }
-
-.cv-side{
-  background:var(--dark);
-  color:white;
-  padding:32px 24px;
-  direction:rtl;
+.fairy-btn{
+  width:68px;height:68px;border-radius:50%;border:1px solid rgba(255,235,210,.7);
+  background:linear-gradient(145deg,#ffd5e8,#cbb6ff);box-shadow:0 0 30px rgba(255,190,225,.5);
+  font-size:32px;cursor:pointer;animation:float 3s ease-in-out infinite;
 }
-
-.cv-main{
-  padding:35px;
-  direction:rtl;
+.fairy-msg{
+  width:min(300px,70vw);padding:15px 17px;border-radius:20px 20px 20px 4px;
+  background:rgba(28,16,50,.88);border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 15px 45px rgba(0,0,0,.35);font-size:13px;line-height:1.8;
+  transform:translateY(10px);opacity:0;pointer-events:none;transition:.3s;
 }
-
-.cv-name{
-  font-size:28px;
-  font-weight:800;
-  line-height:1.2;
-  margin-bottom:7px;
-  word-break:break-word;
-}
-
-.cv-job{
-  color:#c8c4ff;
-  font-size:14px;
-  font-weight:bold;
-  margin-bottom:25px;
-  word-break:break-word;
-}
-
-.cv-section{
-  margin-bottom:28px;
-}
-
-.cv-section-title{
-  color:var(--primary);
-  font-size:12px;
-  font-weight:bold;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  border-bottom:2px solid var(--primary);
-  padding-bottom:6px;
-  margin-bottom:12px;
-}
-
-.cv-side .cv-section-title{
-  color:#c8c4ff;
-  border-color:#c8c4ff;
-}
-
-.contact{
-  font-size:11px;
-  line-height:2;
-  color:#d7d7e3;
-  word-break:break-word;
-}
-
-.cv-summary{
-  color:#555568;
-  font-size:12px;
-  line-height:1.8;
-  white-space:pre-line;
-}
-
-.placeholder{
-  color:#aaaabb;
-  font-style:italic;
-}
-
-/* FEATURES */
-
-.features{
-  padding:80px 6%;
-  background:white;
-}
-
-.features-title{
-  text-align:center;
-  max-width:650px;
-  margin:0 auto 45px;
-}
-
-.features-title h2{
-  color:var(--dark);
-  font-size:35px;
-  margin-bottom:10px;
-}
-
-.features-title p{
-  color:var(--muted);
-}
-
-.feature-grid{
-  max-width:1100px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-
-.feature{
-  padding:25px;
-  border:1px solid var(--border);
-  border-radius:16px;
-}
-
-.feature-icon{
-  font-size:28px;
-  margin-bottom:12px;
-}
-
-.feature h3{
-  margin-bottom:7px;
-  color:var(--dark);
-}
-
-.feature p{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.7;
-}
-
-/* MOBILE */
-
-@media(max-width:950px){
-
-  .builder{
-    grid-template-columns:1fr;
-  }
-
-  .preview-area{
-    overflow:auto;
-  }
-
-  .cv{
-    min-width:700px;
-  }
-
-  .feature-grid{
-    grid-template-columns:1fr;
-  }
-}
-
-@media(max-width:600px){
-
-  nav{
-    padding:0 4%;
-  }
-
-  .hero{
-    padding:55px 5%;
-  }
-
-  .hero p{
-    font-size:16px;
-  }
-
-  #builder{
-    padding:20px 4%;
-  }
-
-  .form-card{
-    padding:18px;
-  }
-
-  .preview-area{
-    padding:10px;
-  }
-
-  .cv{
-    min-width:650px;
-  }
+.fairy.open .fairy-msg{opacity:1;transform:translateY(0)}
+footer{text-align:center;padding:40px;color:#bcaac9;background:#0e081b;font-size:13px}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@keyframes bob{50%{transform:translateY(7px)}}
+@keyframes float{50%{transform:translateY(-7px) rotate(2deg)}}
+@keyframes twinkle{50%{opacity:.15;transform:scale(.5)}}
+@media(max-width:760px){
+  .cards{grid-template-columns:1fr}
+  .card{min-height:auto}
+  section{padding:70px 5%}
+  .choices{grid-template-columns:1fr}
 }
 </style>
 </head>
-
 <body>
 
-<!-- NAVBAR -->
-
-<nav>
-
-  <div class="logo">
-    CV<span>ora</span> AI
+<header class="hero" id="top">
+  <div class="stars" aria-hidden="true">
+    <i class="star" style="top:12%;left:15%"></i><i class="star" style="top:22%;left:76%;animation-delay:.7s"></i>
+    <i class="star" style="top:40%;left:8%;animation-delay:1.1s"></i><i class="star" style="top:30%;left:91%;animation-delay:.3s"></i>
+    <i class="star" style="top:65%;left:84%;animation-delay:1.5s"></i><i class="star" style="top:72%;left:25%;animation-delay:.4s"></i>
   </div>
-
-  <button class="nav-btn" onclick="openBuilder()">
-    إنشاء CV
-  </button>
-
-</nav>
-
-
-<!-- HOME -->
-
-<section class="hero" id="home">
-
   <div class="hero-content">
-
-    <div class="badge">
-      ✨ أنشئ سيرتك الذاتية بسهولة
-    </div>
-
-    <h1>
-      اصنع CV احترافيًا
-      <span>في دقائق</span>
-    </h1>
-
-    <p>
-      أدخل معلوماتك فقط، ودع CVora AI يساعدك على إنشاء
-      سيرة ذاتية عصرية ومنظمة وجاهزة للتقديم.
-    </p>
-
-    <button class="primary-btn" onclick="openBuilder()">
-      ✨ ابدأ إنشاء سيرتي الذاتية
-    </button>
-
+    <div class="kicker">رحلة • تأمل • تحرر • ازدهار</div>
+    <h1>حديقة الروح</h1>
+    <p class="subtitle">رحلة للعودة إلى ذاتكِ… خطوةً بخطوة</p>
+    <a class="cta" href="#garden" onclick="magicSound()">ابدئي رحلتكِ <span>🦋</span></a>
+    <a class="scroll" href="#garden">اسحبي لأسفل <span>⌄</span></a>
   </div>
+</header>
 
+<section class="garden" id="garden">
+  <h2 class="section-title">حديقتكِ تنتظركِ</h2>
+  <p class="section-lead">ليست رحلة لتصبحي شخصًا آخر… بل رحلة لتعودي إلى نفسكِ التي كانت موجودة دائمًا.</p>
+  <div class="cards">
+    <article class="card" onclick="magicSound(); document.querySelector('#journey').scrollIntoView({behavior:'smooth'})">
+      <div class="icon">🌱</div><h3>بذرة الوعي</h3>
+      <p>اكتشفي ما تشعرين به حقًا، بعيدًا عن الحكم على نفسكِ.</p>
+    </article>
+    <article class="card" onclick="magicSound(); alert('هذه المنطقة ستفتح قريبًا ✨')">
+      <div class="icon">🦋</div><h3>بحيرة المشاعر</h3>
+      <p>اقتربي من مشاعركِ بلطف، وافهمي الرسائل التي تحملها.</p>
+    </article>
+    <article class="card" onclick="magicSound(); alert('سنزرع هنا تمارين التحرر والشفاء 🌸')">
+      <div class="icon">🌸</div><h3>حديقة الازدهار</h3>
+      <p>حوّلي الوعي إلى عادات صغيرة تمنحكِ سلامًا حقيقيًا.</p>
+    </article>
+  </div>
 </section>
 
-
-<!-- BUILDER -->
-
-<section id="builder">
-
-  <div class="builder-header">
-
-    <button class="back-btn" onclick="goHome()">
-      ← العودة
-    </button>
-
-    <h2>
-      أنشئ سيرتك الذاتية
-    </h2>
-
-    <p>
-      ابدأ بإدخال معلوماتك الأساسية وشاهد النتيجة مباشرة.
-    </p>
-
-  </div>
-
-
-  <div class="builder">
-
-    <!-- FORM -->
-
-    <div class="form-card">
-
-      <h3>
-        👤 معلوماتك الشخصية
-      </h3>
-
-
-      <div class="field">
-
-        <label>الاسم الكامل</label>
-
-        <input
-          id="name"
-          type="text"
-          placeholder="مثال: خلود"
-          oninput="updateCV()"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>المسمى الوظيفي</label>
-
-        <input
-          id="job"
-          type="text"
-          placeholder="مثال: Chargée de clientèle"
-          oninput="updateCV()"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>البريد الإلكتروني</label>
-
-        <input
-          id="email"
-          type="email"
-          placeholder="exemple@email.com"
-          oninput="updateCV()"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>رقم الهاتف</label>
-
-        <input
-          id="phone"
-          type="text"
-          placeholder="+213 ..."
-          oninput="updateCV()"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>المدينة / البلد</label>
-
-        <input
-          id="location"
-          type="text"
-          placeholder="الجزائر، الجزائر"
-          oninput="updateCV()"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>النبذة المهنية</label>
-
-        <textarea
-          id="summary"
-          placeholder="اكتب نبذة قصيرة عن خبرتك وأهدافك المهنية..."
-          oninput="updateCV()"
-        ></textarea>
-
-      </div>
-
+<section class="journey" id="journey">
+  <div class="journey-box">
+    <h2 class="section-title">المحطة الأولى</h2>
+    <p class="section-lead">خذي نفسًا هادئًا… لا توجد إجابة صحيحة أو خاطئة هنا.</p>
+    <div class="progress"><i></i></div>
+    <div class="question">ما الشعور الذي يزوركِ كثيرًا هذه الأيام؟</div>
+    <div class="choices">
+      <button class="choice" onclick="answer(this)">القلق والتوتر</button>
+      <button class="choice" onclick="answer(this)">الحزن والثقل</button>
+      <button class="choice" onclick="answer(this)">الغضب والانزعاج</button>
+      <button class="choice" onclick="answer(this)">الفراغ أو الضياع</button>
     </div>
-
-
-    <!-- PREVIEW -->
-
-    <div class="preview-area">
-
-      <div class="preview-label">
-        👀 المعاينة المباشرة
-      </div>
-
-      <div class="cv">
-
-        <!-- SIDE -->
-
-        <aside class="cv-side">
-
-          <div class="cv-name" id="cvName">
-            اسمك الكامل
-          </div>
-
-          <div class="cv-job" id="cvJob">
-            المسمى الوظيفي
-          </div>
-
-
-          <div class="cv-section">
-
-            <div class="cv-section-title">
-              التواصل
-            </div>
-
-            <div class="contact">
-
-              <div id="cvEmail">
-                البريد الإلكتروني
-              </div>
-
-              <div id="cvPhone">
-                رقم الهاتف
-              </div>
-
-              <div id="cvLocation">
-                المدينة / البلد
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="cv-section">
-
-            <div class="cv-section-title">
-              المهارات
-            </div>
-
-            <div class="contact">
-              ستتم إضافة المهارات لاحقًا
-            </div>
-
-          </div>
-
-        </aside>
-
-
-        <!-- MAIN -->
-
-        <main class="cv-main">
-
-          <div class="cv-section">
-
-            <div class="cv-section-title">
-              الملف الشخصي
-            </div>
-
-            <div class="cv-summary" id="cvSummary">
-
-              <span class="placeholder">
-                ستظهر نبذتك المهنية هنا...
-              </span>
-
-            </div>
-
-          </div>
-
-
-          <div class="cv-section">
-
-            <div class="cv-section-title">
-              الخبرة المهنية
-            </div>
-
-            <div class="placeholder">
-              سيتم إضافة الخبرات في الخطوة القادمة.
-            </div>
-
-          </div>
-
-
-          <div class="cv-section">
-
-            <div class="cv-section-title">
-              التعليم
-            </div>
-
-            <div class="placeholder">
-              سيتم إضافة التعليم في الخطوة القادمة.
-            </div>
-
-          </div>
-
-        </main>
-
-      </div>
-
-    </div>
-
+    <p id="answer" style="color:#f8d8ed;min-height:28px;margin-top:22px"></p>
   </div>
-
 </section>
 
+<footer>حديقة الروح · مساحة رقمية للتأمل والوعي والرحلة الداخلية 🦋</footer>
 
-<!-- FEATURES -->
-
-<section class="features" id="features">
-
-  <div class="features-title">
-
-    <h2>
-      لماذا CVora AI؟
-    </h2>
-
-    <p>
-      نريد أن نجعل إنشاء السيرة الذاتية أمرًا بسيطًا للجميع.
-    </p>
-
-  </div>
-
-
-  <div class="feature-grid">
-
-    <div class="feature">
-
-      <div class="feature-icon">🤖</div>
-
-      <h3>ذكاء اصطناعي</h3>
-
-      <p>
-        سنضيف لاحقًا مساعدًا ذكيًا يساعدك على تحسين
-        محتوى سيرتك الذاتية.
-      </p>
-
-    </div>
-
-
-    <div class="feature">
-
-      <div class="feature-icon">🎨</div>
-
-      <h3>تصاميم احترافية</h3>
-
-      <p>
-        قوالب عصرية تناسب مختلف الوظائف والمجالات.
-      </p>
-
-    </div>
-
-
-    <div class="feature">
-
-      <div class="feature-icon">📄</div>
-
-      <h3>جاهز للتقديم</h3>
-
-      <p>
-        هدفنا أن تحصل على CV منظم وجاهز لإرساله
-        إلى أصحاب العمل.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
+<div class="fairy" id="fairy">
+  <div class="fairy-msg" id="fairyMsg">مرحبًا بكِ في حديقة الروح ✨ أنا مساعدة رحلتكِ. اضغطي عليّ كلما احتجتِ إلى كلمة لطيفة.</div>
+  <button class="fairy-btn" aria-label="مساعدة الرحلة" onclick="toggleFairy()">🧚🏻‍♀️</button>
+</div>
 
 <script>
-
-function openBuilder(){
-
-  document.getElementById("home").style.display="none";
-
-  document.getElementById("features").style.display="none";
-
-  document.getElementById("builder").style.display="block";
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
+let audioCtx;
+function magicSound(){
+  try{
+    audioCtx ||= new (window.AudioContext||window.webkitAudioContext)();
+    const now=audioCtx.currentTime;
+    [523.25,659.25,783.99].forEach((freq,i)=>{
+      const o=audioCtx.createOscillator(), g=audioCtx.createGain();
+      o.type='sine'; o.frequency.value=freq;
+      g.gain.setValueAtTime(0,now+i*.08);
+      g.gain.linearRampToValueAtTime(.045,now+i*.08+.03);
+      g.gain.exponentialRampToValueAtTime(.001,now+i*.08+.75);
+      o.connect(g).connect(audioCtx.destination); o.start(now+i*.08); o.stop(now+i*.08+.8);
+    });
+  }catch(e){}
 }
-
-
-function goHome(){
-
-  document.getElementById("builder").style.display="none";
-
-  document.getElementById("home").style.display="flex";
-
-  document.getElementById("features").style.display="block";
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
+function toggleFairy(){
+  magicSound();
+  document.getElementById('fairy').classList.toggle('open');
 }
-
-
-function updateCV(){
-
-  const name =
-    document.getElementById("name").value;
-
-  const job =
-    document.getElementById("job").value;
-
-  const email =
-    document.getElementById("email").value;
-
-  const phone =
-    document.getElementById("phone").value;
-
-  const location =
-    document.getElementById("location").value;
-
-  const summary =
-    document.getElementById("summary").value;
-
-
-  document.getElementById("cvName").textContent =
-    name || "اسمك الكامل";
-
-
-  document.getElementById("cvJob").textContent =
-    job || "المسمى الوظيفي";
-
-
-  document.getElementById("cvEmail").textContent =
-    email || "البريد الإلكتروني";
-
-
-  document.getElementById("cvPhone").textContent =
-    phone || "رقم الهاتف";
-
-
-  document.getElementById("cvLocation").textContent =
-    location || "المدينة / البلد";
-
-
-  const summaryBox =
-    document.getElementById("cvSummary");
-
-
-  if(summary){
-
-    summaryBox.textContent=summary;
-
-  }else{
-
-    summaryBox.innerHTML =
-      '<span class="placeholder">ستظهر نبذتك المهنية هنا...</span>';
-
-  }
-
+function answer(btn){
+  magicSound();
+  document.querySelectorAll('.choice').forEach(x=>x.style.outline='none');
+  btn.style.outline='2px solid #ffb9dd';
+  document.getElementById('answer').textContent='أحسنتِ… شكرًا لأنكِ كنتِ صادقة مع نفسكِ. هذه أول زهرة في رحلتكِ 🌸';
+  document.querySelector('.progress i').style.width='25%';
 }
-
 </script>
-
 </body>
 </html>
